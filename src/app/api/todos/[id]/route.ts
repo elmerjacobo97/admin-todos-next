@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { NextResponse, NextRequest } from 'next/server';
-import prisma from '../../../lib/prisma';
+import prisma from '@/lib/prisma';
 import { Todo } from '@prisma/client';
 
 interface Segments {

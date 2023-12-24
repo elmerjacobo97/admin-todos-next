@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { NextResponse, NextRequest } from 'next/server';
-import prisma from '../../lib/prisma';
+import prisma from '@/lib/prisma';
 
 export async function GET(request: Request) {
   // Leer query params
@@ -44,6 +44,21 @@ export async function POST(request: Request) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
+    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
+  }
+}
+
+// Eliminar todos los completados.
+export async function DELETE(request: Request) {
+  try {
+    await prisma.todo.deleteMany({
+      where: {
+        completed: true,
+      },
+    });
+
+    return NextResponse.json({ message: 'Todos deleted' });
+  } catch (error) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }
