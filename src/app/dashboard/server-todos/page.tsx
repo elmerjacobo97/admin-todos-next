@@ -11,7 +11,7 @@ export const metadata = {
   description: 'Listado de todos de la base de datos',
 };
 
-export default async function RestTodosPage() {
+export default async function ServerTodosPage() {
   const todos = await prisma.todo.findMany({ orderBy: { description: 'asc' } });
 
   return (

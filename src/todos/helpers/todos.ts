@@ -1,6 +1,6 @@
 import { Todo } from '@prisma/client';
 
-export const sleep = (seconds: number): Promise<boolean> => {
+const sleep = (seconds: number): Promise<boolean> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(true);
