@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoCalendarNumberOutline, IoBookmarkOutline, IoLogOutOutline, IoListOutline } from 'react-icons/io5';
+import { IoCalendarNumberOutline, IoBookmarkOutline, IoLogOutOutline, IoListOutline, IoCloudDoneOutline, IoCartOutline } from 'react-icons/io5';
 import { SidebarItem } from './SidebarItem';
 
 const menuItems = [
   { icon: <IoCalendarNumberOutline size={30} />, title: 'Dashboard', path: '/dashboard' },
   { icon: <IoBookmarkOutline size={30} />, title: 'Rest Todos', path: '/dashboard/rest-todos' },
   { icon: <IoListOutline size={30} />, title: 'Server Actions', path: '/dashboard/server-todos' },
+  { icon: <IoCloudDoneOutline size={30} />, title: 'Cookies Tabs', path: '/dashboard/cookies' },
+  { icon: <IoCartOutline size={30} />, title: 'Cookies Products', path: '/dashboard/products' },
 ];
 
 export const Sidebar = () => {
