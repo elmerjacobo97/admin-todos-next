@@ -20,6 +20,11 @@ npx prisma generate
 
 ```
 
+## Nota: usuario por defecto
+
+**usuario**: elmer@google.com
+**password**: 123456
+
 7. Ejecutar el seed para [levantar la base de datos local]('http://localhost:3000/api/seed')
 
 ## Prisma commands

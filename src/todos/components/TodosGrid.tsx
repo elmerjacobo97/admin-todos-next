@@ -20,9 +20,11 @@ export const TodosGrid = ({ todos }: Props) => {
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {todos.map((todo) => (
-        <TodoCard todo={todo} key={todo.id} toggleTodo={toggleTodo} />
-      ))}
+      {todos.length > 0 ? (
+        todos.map((todo) => <TodoCard todo={todo} key={todo.id} toggleTodo={toggleTodo} />)
+      ) : (
+        <p className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 text-center text-gray-600">No hay tareas pendientes.</p>
+      )}
     </div>
   );
 };

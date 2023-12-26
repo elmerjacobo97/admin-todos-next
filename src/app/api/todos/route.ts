@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
+import { getUserSessionServer } from '@/auth/actions/auth-actions';
 
 export async function GET(request: Request) {
   // Leer query params
@@ -31,12 +32,22 @@ const postSchema = yup.object({
 });
 
 export async function POST(request: Request) {
+  const user = await getUserSessionServer();
+
+  if (!user) {
+    return NextResponse.json({ error: 'User not authorized' }, { status: 401 });
+  }
+
   try {
-    const body = await postSchema.validate(await request.json());
-    // const { description, completed } = await postSchema.validate(await request.json());
+    // const body = await postSchema.validate(await request.json());
+    const { description, completed } = await postSchema.validate(await request.json());
 
     const todo = await prisma.todo.create({
-      data: body,
+      data: {
+        description,
+        completed,
+        userId: user.id,
+      },
     });
 
     return NextResponse.json(todo);
@@ -50,10 +61,17 @@ export async function POST(request: Request) {
 
 // Eliminar todos los completados.
 export async function DELETE(request: Request) {
+  const user = await getUserSessionServer();
+
+  if (!user) {
+    return NextResponse.json({ error: 'User not authorized' }, { status: 401 });
+  }
+
   try {
     await prisma.todo.deleteMany({
       where: {
         completed: true,
+        userId: user.id,
       },
     });
 
